@@ -10,7 +10,6 @@ export const Footer = () => {
       <Container>
         <ContentFooter>
           <h2>Связь с нами</h2>
-
           <IconContainer>
             <TelegramIcon />
             <MailIcon />
@@ -22,13 +21,23 @@ export const Footer = () => {
 };
 
 const StyledFooter = styled.footer`
-  padding: 35px;
+  margin-top: 100px;
+  padding: 35px 0;
+  border-top: 1px solid #d9d9d9;
 `;
 
 const ContentFooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 14px;
+
+  h2 {
+    color: #3c3c3c;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 100%;
+  }
 `;
 
 const IconContainer = styled.div`

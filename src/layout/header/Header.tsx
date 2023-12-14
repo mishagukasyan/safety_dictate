@@ -17,11 +17,14 @@ export const Header = () => {
   );
 };
 
-const StyledHeader = styled.header``;
+const StyledHeader = styled.header`
+  border-bottom: 1px solid #ededed;
+  padding: 50px 0;
+`;
 
 const ContainerMenu = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ededed;
-  margin-bottom: 28px;
+  align-items: center;
+  margin-bottom: 80px;
 `;

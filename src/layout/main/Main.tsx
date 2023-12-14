@@ -49,41 +49,13 @@ export const Main = () => (
   </MainContainer>
 );
 
-// import React from "react";
-// import styled from "styled-components";
-
-// export const Main = () => {
-//   return (
-//     <MainContainer>
-//       <Container>
-//         <ImageContainer>
-//           <Banner src={photo} />
-//           <ContentContainer>
-//             <h1>
-//               От чрезвычайных ситуаций в 2022 году пострадало 235 274 людей.
-//               Более 70% из них могли бы спастись, если бы знали правила
-//               поведения в экстренных ситуациях. А вы знаете эти правила?
-//               Проверим?
-//             </h1>
-//             <button>Начать тест</button>
-//           </ContentContainer>
-//         </ImageContainer>
-//       </Container>
-//           <Pagination>
-//             <span></span>
-//             <span></span>
-//             <span></span>
-//           </Pagination>
-//     </MainContainer>
-//   );
-// };
-
 const MainContainer = styled.div`
   height: 640px;
 `;
 
 const Banner = styled.img`
   border-radius: 80px;
+  margin-bottom: 32px;
 `;
 
 const ImageContainer = styled.div`
@@ -91,18 +63,6 @@ const ImageContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-// const Pagination = styled.span`
-//   padding: 30px 0 24px 0;
-//   span {
-//     display: inline-block;
-//     width: 20px;
-//     height: 20px;
-//     margin: 5px;
-//     background-color: green;
-//     border-radius: 50%;
-//   }
-// `;
 
 const ContentContainer = styled.div`
   position: absolute;

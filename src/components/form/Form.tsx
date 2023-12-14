@@ -106,8 +106,13 @@ export const Form = () => {
             required
           />
         </FormGroup>
-
-        <Button type="submit">Начать тест</Button>
+        <ButtonContainer>
+          <Button type="submit">Начать тест</Button>
+          <h2>
+            Нажимая кнопку “Начать тест”, Вы принимаете{" "}
+            <a href="#">условия сервиса</a>{" "}
+          </h2>
+        </ButtonContainer>
       </form>
     </FormContainer>
   );
@@ -152,7 +157,6 @@ const Select = styled.select`
 `;
 
 const Button = styled.button`
-  margin-top: 40px;
   padding: 18px 34px;
   font-family: "Raleway";
   font-size: 18px;
@@ -163,4 +167,23 @@ const Button = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 12px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 40px;
+  padding-left: 25px;
+  h2 {
+    width: 218px;
+    color: #3c3c3c;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+  a {
+    color: #3c3c3c;
+    text-decoration-line: underline;
+  }
 `;

@@ -2,7 +2,7 @@ import React from "react";
 
 export const Logo = () => {
   return (
-    <a href="#">
+    <a href="/main">
       <svg
         width="150"
         height="54"
