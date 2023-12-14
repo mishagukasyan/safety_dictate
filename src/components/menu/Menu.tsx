@@ -6,16 +6,16 @@ export const Menu = () => {
     <StyledMenu>
       <ul>
         <li>
-          <a href="#">Тестирование</a>
+          <a href="/testing">Тестирование</a>
         </li>
         <li>
-          <a href="#">Подготовка</a>
+          <a href="/training">Подготовка</a>
         </li>
         <li>
-          <a href="#">Партнеры проекта</a>
+          <a href="/project_partners">Партнеры проекта</a>
         </li>
         <li>
-          <a href="#">О проекте</a>
+          <a href="/about_project">О проекте</a>
         </li>
       </ul>
     </StyledMenu>
