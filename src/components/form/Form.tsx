@@ -107,7 +107,9 @@ export const Form = () => {
           />
         </FormGroup>
         <ButtonContainer>
-          <Button type="submit">Начать тест</Button>
+          <Button type="submit">
+            <a href="/testpage">Начать тест</a>{" "}
+          </Button>
           <h2>
             Нажимая кнопку “Начать тест”, Вы принимаете{" "}
             <a href="#">условия сервиса</a>{" "}

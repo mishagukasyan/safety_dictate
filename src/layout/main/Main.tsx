@@ -16,7 +16,9 @@ const Slide = (props: SlidePropsType) => {
       <Banner src={props.image} />
       <ContentContainer>
         <h1>{props.text}</h1>
-        <button>Начать тест</button>
+        <button>
+          <a href="/testpage">Начать тест</a>{" "}
+        </button>
       </ContentContainer>
     </ImageContainer>
   );
