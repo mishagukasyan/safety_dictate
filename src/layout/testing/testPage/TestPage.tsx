@@ -118,13 +118,14 @@ export const TestPage: React.FC = () => {
               >
                 Следующий вопрос
               </button>
+
               <button
                 onClick={handleNextQuestion}
                 disabled={
                   currentQuestion === questions.length - 1 || timeLeft === 0
                 }
               >
-                Прекратить тест
+                Предыдущий вопрос
               </button>
             </NavigationButtons>
           </>

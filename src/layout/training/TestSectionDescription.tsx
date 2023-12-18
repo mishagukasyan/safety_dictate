@@ -5,38 +5,38 @@ export const TestSectionDescription = () => {
   return (
     <StyledTestSection>
       <TextSection>
-        <Text href="#">
+        <TextLink href="/testSectionPage1">
           <h2>
             Раздел 1. Психологические факторы, оказывающие влияние на активность
             в политической сфере
           </h2>
-        </Text>
+        </TextLink>
       </TextSection>
       <TextSection>
-        <Text href="#">
+        <TextLink href="/testSectionPage2">
           <h2>
             Раздел 2. Влияние психологической совместимости членов
             профессиональной группы на социально-психологический климат
             коллектива
           </h2>
-        </Text>
+        </TextLink>
       </TextSection>
       <TextSection>
-        <Text href="#">
+        <TextLink href="/testSectionPage3">
           <h2>
             Раздел 3. Условия и механизмы формирования познавательных процессов
             представителей трех возрастов (дошкольное детство, младший школьный
             возраст, подростковый возраст)
           </h2>
-        </Text>
+        </TextLink>
       </TextSection>
       <TextSection>
-        <Text href="#">
+        <TextLink href="/testSectionPage4">
           <h2>
             Раздел 4. Социально-психологический тренинг как способ повышения
             коммуникативной компетентности
           </h2>
-        </Text>
+        </TextLink>
       </TextSection>
     </StyledTestSection>
   );
@@ -55,7 +55,7 @@ const TextSection = styled.div`
   }
 `;
 
-const Text = styled.a`
+const TextLink = styled.a`
   h2 {
     padding: 32px;
     padding-left: 40px;
