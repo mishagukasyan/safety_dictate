@@ -52,6 +52,9 @@ export const Main = () => (
 );
 
 const MainContainer = styled.div`
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
   height: 640px;
 `;
 
@@ -69,7 +72,7 @@ const ImageContainer = styled.div`
 const ContentContainer = styled.div`
   position: absolute;
   top: 320px;
-  left: 250px;
+  left: 150px;
   text-align: center;
   color: white;
   display: flex;
@@ -77,7 +80,8 @@ const ContentContainer = styled.div`
   gap: 50px;
 
   h1 {
-    width: 510px;
+    max-width: 510px;
+    width: 100%;
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 400;

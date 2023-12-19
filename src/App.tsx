@@ -11,6 +11,7 @@ import { TestSectionPage1 } from "./layout/training/trainingTestSection/TestSect
 import { TestSectionPage2 } from "./layout/training/trainingTestSection/TestSectionPage2";
 import { TestSectionPage3 } from "./layout/training/trainingTestSection/TestSectionPage3";
 import { TestSectionPage4 } from "./layout/training/trainingTestSection/TestSectionPage4";
+import { AboutTheProject } from "./layout/aboutProject/AboutTheProject";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/testing" element={<Testing />} />
           <Route path="/testpage" element={<TestPage />} />
           <Route path="/training" element={<Training />} />
+          <Route path="/about_project" element={<AboutTheProject />} />
           <Route path="/testSectionPage1" element={<TestSectionPage1 />} />
           <Route path="/testSectionPage2" element={<TestSectionPage2 />} />
           <Route path="/testSectionPage3" element={<TestSectionPage3 />} />
