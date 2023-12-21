@@ -244,7 +244,11 @@ const NavigationButtons = styled.div`
 
   button {
     margin-top: 80px;
-    padding: 10px;
+    padding: 18px 34px;
+    font-family: Raleway;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 120%;
     background-color: white;
     color: #949494;
     border: 1px solid #949494;
