@@ -15,11 +15,23 @@ export const Form = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    if (name === "age") {
+      const ageValue = parseInt(value, 10);
+      if (isNaN(ageValue) || ageValue <= 0) {
+        setFormData({ ...formData, [name]: "" });
+        return;
+      }
+    }
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const ageValue = parseInt(formData.age, 10);
+    if (isNaN(ageValue) || ageValue <= 0) {
+      window.alert("Введите корректный возраст");
+      return;
+    }
     console.log("Отправленная форма:", formData);
   };
 
