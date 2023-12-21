@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
+import { useNavigate } from "react-router-dom";
 
 type Question = {
   id: number;
@@ -12,6 +13,7 @@ export const TestSectionPage1: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [timeLeft, setTimeLeft] = useState(15);
+  const navigate = useNavigate();
 
   const questions: Question[] = [
     {
@@ -75,6 +77,15 @@ export const TestSectionPage1: React.FC = () => {
     }
   };
 
+  const handleStopTest = () => {
+    navigate("/main");
+  };
+
+  const handleConfirmAnswer = () => {
+    // Добавить обработку подтверждения ответа, например, отправку на сервер
+    // В данном примере просто переходим к следующему вопросу
+    handleNextQuestion();
+  };
   const currentQuestionData = questions[currentQuestion];
 
   return (
@@ -111,20 +122,24 @@ export const TestSectionPage1: React.FC = () => {
             </Options>
             <NavigationButtons>
               <button
-                onClick={handlePrevQuestion}
-                disabled={currentQuestion === 0}
+                onClick={handleConfirmAnswer}
+                disabled={answers.length === 0} // Кнопка неактивна, если ответ не выбран
               >
-                Следующий вопрос
+                Подтвердить ответ
               </button>
-
-              <button
-                onClick={handleNextQuestion}
-                disabled={
-                  currentQuestion === questions.length - 1 || timeLeft === 0
-                }
-              >
-                Предыдущий вопрос
-              </button>
+              <ButtonContainer>
+                <button
+                  onClick={handlePrevQuestion}
+                  disabled={
+                    currentQuestion === questions.length - 1 || timeLeft === 0
+                  }
+                >
+                  Предыдущий вопрос
+                </button>
+                <button onClick={handleStopTest} disabled={timeLeft === 0}>
+                  Прекратить тест
+                </button>
+              </ButtonContainer>
             </NavigationButtons>
           </>
         )}
@@ -216,6 +231,11 @@ const Dot = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 32px;
 `;
 
 const NavigationButtons = styled.div`

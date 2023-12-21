@@ -27,11 +27,7 @@ export const Form = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const ageValue = parseInt(formData.age, 10);
-    if (isNaN(ageValue) || ageValue <= 0) {
-      window.alert("Введите корректный возраст");
-      return;
-    }
+
     console.log("Отправленная форма:", formData);
   };
 
