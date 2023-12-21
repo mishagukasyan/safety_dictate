@@ -6,30 +6,29 @@ import { Tasks } from "./task/Tasks";
 export const AboutTheProject = () => {
   return (
     <StyledAboutTheProject>
+      <TextContainer>
+        <h2>Миссия проекта</h2>
+        <BorderBotton></BorderBotton>
+        <h3>
+          Проект «Диктант безопасности» направлен на проверку и улучшение
+          знаний, умений и готовности к действиям в условиях чрезвычайных
+          ситуаций и гражданской обороны.
+        </h3>
+      </TextContainer>
       <Container>
-        <TextContainer>
-          <h2>Миссия проекта</h2>
-          <BorderBotton></BorderBotton>
-          <h3>
-            Проект «Диктант безопасности» направлен на проверку и улучшение
-            знаний, умений и готовности к действиям в условиях чрезвычайных
-            ситуаций и гражданской обороны.
-          </h3>
-        </TextContainer>
         <Tasks />
       </Container>
     </StyledAboutTheProject>
   );
 };
 
-const StyledAboutTheProject = styled.div`
-  background: #f4fbff;
-`;
+const StyledAboutTheProject = styled.div``;
 
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #f4fbff;
 
   h2 {
     width: 308px;
@@ -57,4 +56,5 @@ const BorderBotton = styled.div`
   width: 500px;
   height: 2px;
   background: #3798cd;
+  margin: 0 auto;
 `;

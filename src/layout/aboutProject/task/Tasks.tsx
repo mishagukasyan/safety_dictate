@@ -14,4 +14,6 @@ export const Tasks = () => {
   );
 };
 
-const StyledTask = styled.div``;
+const StyledTask = styled.div`
+  margin-top: 90px;
+`;
