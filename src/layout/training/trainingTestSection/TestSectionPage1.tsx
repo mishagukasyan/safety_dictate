@@ -66,14 +66,14 @@ export const TestSectionPage1: React.FC = () => {
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
-      setAnswers([]); // Сбросить ответы при переходе к следующему вопросу
+      setAnswers([]);
     }
   };
 
   const handlePrevQuestion = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion((prev) => Math.max(0, prev - 1));
-      setAnswers([]); // Сбросить ответы при переходе к предыдущему вопросу
+      setAnswers([]);
     }
   };
 
@@ -82,8 +82,8 @@ export const TestSectionPage1: React.FC = () => {
   };
 
   const handleConfirmAnswer = () => {
-    // Добавить обработку подтверждения ответа, например, отправку на сервер
-    // В данном примере просто переходим к следующему вопросу
+    // Добавить обработку подтверждения ответа отправку на сервер
+
     handleNextQuestion();
   };
   const currentQuestionData = questions[currentQuestion];
