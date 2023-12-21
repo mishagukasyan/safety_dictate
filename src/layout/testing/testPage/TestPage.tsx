@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
+import { useNavigate } from "react-router-dom";
 
 type Question = {
   id: number;
@@ -12,6 +13,7 @@ export const TestPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [timeLeft, setTimeLeft] = useState(15);
+  const navigate = useNavigate();
 
   const questions: Question[] = [
     {
@@ -68,11 +70,8 @@ export const TestPage: React.FC = () => {
     }
   };
 
-  const handlePrevQuestion = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion((prev) => Math.max(0, prev - 1));
-      setAnswers([]);
-    }
+  const handleStopTest = () => {
+    navigate("/main");
   };
 
   const currentQuestionData = questions[currentQuestion];
@@ -82,7 +81,7 @@ export const TestPage: React.FC = () => {
       <ControlTestingText>Контрольное тестирование</ControlTestingText>
       <TestContainer>
         <Progress>
-          Прогресс {currentQuestion + 1} из {questions.length} вопросов
+          Прогресс: {currentQuestion + 1} из {questions.length} вопросов
         </Progress>
         <StatusLine>
           <CurrentStatus
@@ -113,19 +112,16 @@ export const TestPage: React.FC = () => {
             </Options>
             <NavigationButtons>
               <button
-                onClick={handlePrevQuestion}
-                disabled={currentQuestion === 0}
-              >
-                Следующий вопрос
-              </button>
-
-              <button
                 onClick={handleNextQuestion}
                 disabled={
                   currentQuestion === questions.length - 1 || timeLeft === 0
                 }
               >
-                Предыдущий вопрос
+                Следующий вопрос
+              </button>
+
+              <button onClick={handleStopTest} disabled={timeLeft === 0}>
+                Прекратить тест
               </button>
             </NavigationButtons>
           </>
@@ -150,7 +146,6 @@ const TestContainer = styled.div`
 
 const Progress = styled.div`
   margin-bottom: 10px;
-  text-align: center;
   color: #3c3c3c;
   font-size: 18px;
   font-weight: 400;
@@ -235,7 +230,11 @@ const NavigationButtons = styled.div`
 
   button {
     margin-top: 80px;
-    padding: 10px;
+    padding: 18px 34px;
+    font-family: Raleway;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 120%;
     background-color: white;
     color: #949494;
     border: 1px solid #949494;

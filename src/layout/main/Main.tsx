@@ -16,9 +16,9 @@ const Slide = (props: SlidePropsType) => {
       <Banner src={props.image} />
       <ContentContainer>
         <h1>{props.text}</h1>
-        <button>
+        <StyledButton>
           <a href="/testpage">Начать тест</a>{" "}
-        </button>
+        </StyledButton>
       </ContentContainer>
     </ImageContainer>
   );
@@ -88,15 +88,21 @@ const ContentContainer = styled.div`
     color: #f1f1f1;
     text-align: justify;
   }
+`;
 
-  button {
-    width: 175px;
-    padding: 18px 34px;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    border-radius: 12px;
-    background: var(--unnamed, #3798cd);
+const StyledButton = styled.button`
+  width: 175px;
+  padding: 18px 34px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #3798cd;
+  color: #fff;
+  font-family: Raleway;
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 `;
