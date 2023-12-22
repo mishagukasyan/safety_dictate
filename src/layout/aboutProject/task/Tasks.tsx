@@ -7,7 +7,7 @@ import { TaskDescriptions } from "./TaskDescription";
 export const Tasks = () => {
   return (
     <StyledTask>
-      <h2>Наши задачи:</h2>
+      <StyledTaskText>Наши задачи:</StyledTaskText>
       <ArrowTasksIcon />
       <TaskDescriptions />
     </StyledTask>
@@ -16,4 +16,12 @@ export const Tasks = () => {
 
 const StyledTask = styled.div`
   margin-top: 90px;
+`;
+
+const StyledTaskText = styled.h2`
+  color: #3c3c3c;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0.8px;
 `;

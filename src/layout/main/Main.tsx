@@ -17,7 +17,7 @@ const Slide = (props: SlidePropsType) => {
       <ContentContainer>
         <h1>{props.text}</h1>
         <StyledButton>
-          <a href="/testpage">Начать тест</a>{" "}
+          <a href="/testing">Начать тест</a>{" "}
         </StyledButton>
       </ContentContainer>
     </ImageContainer>

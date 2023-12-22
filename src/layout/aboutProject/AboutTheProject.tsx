@@ -38,6 +38,7 @@ const TextContainer = styled.div`
     font-size: 40px;
     font-weight: 600;
     line-height: 120%;
+
     padding: 90px 0 20px 0;
   }
   h3 {
