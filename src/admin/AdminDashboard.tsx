@@ -11,11 +11,9 @@ export const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Пример простой проверки логина и пароля
     if (login === "admin" && password === "admin") {
       setIsLoggedIn(true);
 
-      // Перенаправление на новую страницу
       navigate("/adminReport");
     } else {
       setIsLoggedIn(false);
