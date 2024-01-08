@@ -17,6 +17,10 @@ export const Menu = () => {
         </li>
         <li>
           <StyledNavLink to="/about_project">О проекте</StyledNavLink>
+        </li>{" "}
+        {/* Временно */}
+        <li>
+          <StyledNavLink to="/admin">Админ</StyledNavLink>
         </li>
       </ul>
     </StyledMenu>

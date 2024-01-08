@@ -12,6 +12,9 @@ import { TestSectionPage2 } from "./layout/training/trainingTestSection/TestSect
 import { TestSectionPage3 } from "./layout/training/trainingTestSection/TestSectionPage3";
 import { TestSectionPage4 } from "./layout/training/trainingTestSection/TestSectionPage4";
 import { AboutTheProject } from "./layout/aboutProject/AboutTheProject";
+// import { AdminLoader } from "./admin/AdminLoader";
+import { AdminDashboard } from "./admin/AdminDashboard";
+import { AdminReport } from "./admin/adminReport/AdminReport";
 
 function App() {
   return (
@@ -28,6 +31,10 @@ function App() {
           <Route path="/testSectionPage2" element={<TestSectionPage2 />} />
           <Route path="/testSectionPage3" element={<TestSectionPage3 />} />
           <Route path="/testSectionPage4" element={<TestSectionPage4 />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/adminReport" element={<AdminReport />} />
+
+          {/* <Route path="/admin/:adminToken/*" element={<AdminLoader />} /> */}
         </Routes>
         <Footer />
       </div>

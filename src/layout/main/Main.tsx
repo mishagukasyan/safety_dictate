@@ -6,7 +6,6 @@ import "./../../styles/slider.css";
 import photo from "../../assets/image/banner1.webp";
 import photo2 from "../../assets/image/banner2.webp";
 import photo3 from "../../assets/image/banner3.webp";
-import { Container } from "../../components/Container";
 
 type SlidePropsType = { text: string; image: string };
 
