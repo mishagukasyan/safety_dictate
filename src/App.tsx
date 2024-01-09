@@ -14,13 +14,15 @@ import { TestSectionPage4 } from "./layout/training/trainingTestSection/TestSect
 import { AboutTheProject } from "./layout/aboutProject/AboutTheProject";
 // import { AdminLoader } from "./admin/AdminLoader";
 import { AdminDashboard } from "./admin/AdminDashboard";
-import { AdminReport } from "./admin/adminReport/AdminReport";
+import { AdminPanel } from "./admin/adminFile/AdminPanel";
 
 function App() {
+  const isAdminPanel: boolean = false;
+
   return (
     <BrowserRouter>
       <div>
-        <Header />
+        <Header isAdminPanel={isAdminPanel} />
         <Routes>
           <Route path="/main" element={<Main />} />
           <Route path="/testing" element={<Testing />} />
@@ -32,7 +34,7 @@ function App() {
           <Route path="/testSectionPage3" element={<TestSectionPage3 />} />
           <Route path="/testSectionPage4" element={<TestSectionPage4 />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/adminReport" element={<AdminReport />} />
+          <Route path="/adminReport" element={<AdminPanel />} />
 
           {/* <Route path="/admin/:adminToken/*" element={<AdminLoader />} /> */}
         </Routes>

@@ -3,14 +3,19 @@ import styled from "styled-components";
 import { Logo } from "../../components/logo/Logo";
 import { Menu } from "../../components/menu/Menu";
 import { Container } from "../../components/Container";
+import { AdminHeader } from "../../admin/adminFile/AdminHeader";
 
-export const Header = () => {
+interface HeaderProps {
+  isAdminPanel: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ isAdminPanel }) => {
   return (
     <StyledHeader>
       <Container>
         <ContainerMenu>
           <Logo />
-          <Menu />
+          {isAdminPanel ? <AdminHeader /> : <Menu />}
         </ContainerMenu>
       </Container>
     </StyledHeader>
