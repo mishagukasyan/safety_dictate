@@ -9,6 +9,7 @@ export const Form = () => {
     region: "",
     city: "",
     email: "",
+    id: "",
   });
 
   const handleChange = (
@@ -114,6 +115,19 @@ export const Form = () => {
             required
           />
         </FormGroup>
+        <FormGroup>
+          <Label htmlFor="email">
+            Идентификатор <span>(Необязательное поле)</span>
+          </Label>
+          <Input
+            placeholder="1209830"
+            type="id"
+            id="id"
+            name="id"
+            value={formData.id}
+            onChange={handleChange}
+          />
+        </FormGroup>
         <ButtonContainer>
           <Button type="submit">
             <a href="/testpage">Начать тест</a>{" "}
@@ -147,6 +161,11 @@ const Label = styled.label`
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;
+  span {
+    color: #949494;
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
 
 const Input = styled.input`

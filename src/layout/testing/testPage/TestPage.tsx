@@ -2,17 +2,23 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
 import { useNavigate } from "react-router-dom";
+import { TestResultPageWin } from "../testResultPage/TestResultPageWin";
 
 type Question = {
   id: number;
   text: string;
   options: string[];
+  correctAnswer: string;
 };
 
 export const TestPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
+  const [submittedAnswers, setSubmittedAnswers] = useState<string[]>([]);
   const [timeLeft, setTimeLeft] = useState(15);
+  const [testResult, setTestResult] = useState<"passed" | "failed" | null>(
+    null
+  );
   const navigate = useNavigate();
 
   const questions: Question[] = [
@@ -20,6 +26,7 @@ export const TestPage: React.FC = () => {
       id: 1,
       text: "Признание самоценности личности, реализация внутренней и внешней свободы – это принцип ... ",
       options: ["гуманизма ", "непрерывности", "демократизации", "целостности"],
+      correctAnswer: "гуманизма",
     },
     {
       id: 2,
@@ -29,6 +36,8 @@ export const TestPage: React.FC = () => {
         "восприятие внешних признаков человека, соотнесение их с его личностными характеристиками, интерпретацию и прогнозирование на этой основе его поступков",
         "речь, которая дополняется не только экспрессивными реакциями поведения, но и его семантикой, т.е. смыслом поступков",
       ],
+      correctAnswer:
+        "восприятие внешних признаков человека, соотнесение их с его личностными характеристиками, интерпретацию и прогнозирование на этой основе его поступков",
     },
     {
       id: 3,
@@ -39,11 +48,13 @@ export const TestPage: React.FC = () => {
         "константность",
         "предметность",
       ],
+      correctAnswer: "структурность ",
     },
     {
       id: 4,
       text: "Вопрос 4",
       options: ["Ответ 1", "Ответ 2", "Ответ 3", "Ответ 4"],
+      correctAnswer: "Ответ 1",
     },
   ];
 
@@ -52,26 +63,49 @@ export const TestPage: React.FC = () => {
       setTimeLeft((prev) => Math.max(0, prev - 1));
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [currentQuestion]);
+    return () => {
+      clearInterval(timer);
+      if (currentQuestion === questions.length - 1) {
+        const correctAnswers = questions.reduce(
+          (acc, question) =>
+            acc + (answers.includes(question.correctAnswer) ? 1 : 0),
+          0
+        );
+        const percentage = (correctAnswers / questions.length) * 100;
+        setTestResult(percentage >= 80 ? "passed" : "failed");
+        navigate("/results");
+      }
+    };
+  }, [currentQuestion, answers, questions.length]);
 
   useEffect(() => {
     setTimeLeft(15);
   }, [currentQuestion]);
 
   const handleAnswer = (selectedOption: string) => {
-    setAnswers([selectedOption]);
+    if (testResult === null) {
+      setAnswers([selectedOption]);
+    }
   };
 
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
       setAnswers([]);
+    } else {
+      const correctAnswers = questions.reduce(
+        (acc, question) =>
+          acc + (submittedAnswers.includes(question.correctAnswer) ? 1 : 0),
+        0
+      );
+      const percentage = (correctAnswers / questions.length) * 100;
+      setTestResult(percentage >= 80 ? "passed" : "failed");
+      navigate("/results", { state: { result } });
     }
   };
 
   const handleStopTest = () => {
-    navigate("/main");
+    setTestResult("failed");
   };
 
   const currentQuestionData = questions[currentQuestion];
@@ -80,50 +114,63 @@ export const TestPage: React.FC = () => {
     <Container>
       <ControlTestingText>Контрольное тестирование</ControlTestingText>
       <TestContainer>
-        <Progress>
-          Прогресс: {currentQuestion + 1} из {questions.length} вопросов
-        </Progress>
-        <StatusLine>
-          <CurrentStatus
-            style={{
-              width: `${((currentQuestion + 1) / questions.length) * 100}%`,
-            }}
-          />
-        </StatusLine>
-        <Timer>
-          <span>
-            {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
-            {String(timeLeft % 60).padStart(2, "0")}
-          </span>
-        </Timer>
-
-        {currentQuestionData && (
+        {testResult !== null ? (
+          <div>
+            {testResult === "passed" ? (
+              <TestResultPageWin result={testResult} />
+            ) : (
+              <div>
+                <p>Test not passed!</p>
+                <p>Your result: {testResult}</p>
+              </div>
+            )}
+          </div>
+        ) : (
           <>
-            <QuestionText>{currentQuestionData.text}</QuestionText>
-            <Options>
-              {currentQuestionData.options.map((option, index) => (
-                <Option key={index} onClick={() => handleAnswer(option)}>
-                  <RadioButton selected={answers.includes(option)}>
-                    {answers.includes(option) && <Dot />}
-                  </RadioButton>
-                  {option}
-                </Option>
-              ))}
-            </Options>
-            <NavigationButtons>
-              <button
-                onClick={handleNextQuestion}
-                disabled={
-                  currentQuestion === questions.length - 1 || timeLeft === 0
-                }
-              >
-                Следующий вопрос
-              </button>
-
-              <button onClick={handleStopTest} disabled={timeLeft === 0}>
-                Прекратить тест
-              </button>
-            </NavigationButtons>
+            <Progress>
+              Прогресс: {currentQuestion + 1} из {questions.length} вопросов
+            </Progress>
+            <StatusLine>
+              <CurrentStatus
+                style={{
+                  width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+                }}
+              />
+            </StatusLine>
+            <Timer>
+              <span>
+                {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
+                {String(timeLeft % 60).padStart(2, "0")}
+              </span>
+            </Timer>
+            {currentQuestionData && (
+              <>
+                <QuestionText>{currentQuestionData.text}</QuestionText>
+                <Options>
+                  {currentQuestionData.options.map((option, index) => (
+                    <Option key={index} onClick={() => handleAnswer(option)}>
+                      <RadioButton selected={answers.includes(option)}>
+                        {answers.includes(option) && <Dot />}
+                      </RadioButton>
+                      {option}
+                    </Option>
+                  ))}
+                </Options>
+                <NavigationButtons>
+                  <button
+                    onClick={handleNextQuestion}
+                    disabled={
+                      currentQuestion === questions.length - 1 || timeLeft === 0
+                    }
+                  >
+                    Следующий вопрос
+                  </button>
+                  <button onClick={handleStopTest} disabled={timeLeft === 0}>
+                    Прекратить тест
+                  </button>
+                </NavigationButtons>
+              </>
+            )}
           </>
         )}
       </TestContainer>
