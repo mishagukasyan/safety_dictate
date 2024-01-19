@@ -4,33 +4,22 @@ import styled from "styled-components";
 import { Medal } from "../../../components/icons/Medal";
 
 interface TestResultPageWinProps {
-  location: {
-    state: {
-      result: string;
-    };
-  };
+  result: string;
 }
 
 export const TestResultPageWin: React.FC<TestResultPageWinProps> = ({
-  location,
+  result,
 }) => {
-  const result = location.state?.result || "failed"; // Значение по умолчанию, если результат не передан
-
   return (
     <Container>
       <ResultTestPage>
         <ResultTextContainer>
-          <h2>
-            {result === "passed"
-              ? "Поздравляем с успешным прохождением теста!"
-              : "Тест не сдан"}
-          </h2>
+          <h2>Поздравляем с успешным прохождением теста!</h2>
+          <p>Ваш результат: {result}</p>
         </ResultTextContainer>
-        {result === "passed" && (
-          <ImgWrapper>
-            <Medal />
-          </ImgWrapper>
-        )}
+        <ImgWrapper>
+          <Medal />
+        </ImgWrapper>
       </ResultTestPage>
     </Container>
   );

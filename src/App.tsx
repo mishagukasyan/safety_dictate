@@ -16,6 +16,7 @@ import { AboutTheProject } from "./layout/aboutProject/AboutTheProject";
 import { AdminDashboard } from "./admin/AdminDashboard";
 import { AdminPanel } from "./admin/adminFile/AdminPanel";
 import { TestResultPageWin } from "./layout/testing/testResultPage/TestResultPageWin";
+import { TestResultPageFailed } from "./layout/testing/testResultPage/TestResultPageFailed";
 
 function App() {
   const isAdminPanel: boolean = false;
@@ -37,6 +38,7 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/adminReport" element={<AdminPanel />} />
           <Route path="/results" element={<TestResultPageWin />} />
+          <Route path="/results" element={<TestResultPageFailed />} />
 
           {/* <Route path="/admin/:adminToken/*" element={<AdminLoader />} /> */}
         </Routes>

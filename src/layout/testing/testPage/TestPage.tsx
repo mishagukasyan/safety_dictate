@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container } from "../../../components/Container";
 import { useNavigate } from "react-router-dom";
 import { TestResultPageWin } from "../testResultPage/TestResultPageWin";
+import { TestResultPageFailed } from "../testResultPage/TestResultPageFailed";
 
 type Question = {
   id: number;
@@ -73,7 +74,6 @@ export const TestPage: React.FC = () => {
         );
         const percentage = (correctAnswers / questions.length) * 100;
         setTestResult(percentage >= 80 ? "passed" : "failed");
-        navigate("/results");
       }
     };
   }, [currentQuestion, answers, questions.length]);
@@ -99,8 +99,11 @@ export const TestPage: React.FC = () => {
         0
       );
       const percentage = (correctAnswers / questions.length) * 100;
-      setTestResult(percentage >= 80 ? "passed" : "failed");
-      navigate("/results", { state: { result } });
+      if (percentage >= 80) {
+        navigate("/results", { state: { result: "passed" } });
+      } else {
+        navigate("/results-failed", { state: { result: "failed" } });
+      }
     }
   };
 
@@ -120,8 +123,7 @@ export const TestPage: React.FC = () => {
               <TestResultPageWin result={testResult} />
             ) : (
               <div>
-                <p>Test not passed!</p>
-                <p>Your result: {testResult}</p>
+                <TestResultPageFailed result={testResult} />
               </div>
             )}
           </div>
