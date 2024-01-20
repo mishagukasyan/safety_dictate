@@ -10,7 +10,6 @@ interface TestResultPageWinProps {
 export const TestResultPageWin: React.FC<TestResultPageWinProps> = ({
   result,
 }) => {
-  console.log("Result in TestResultPageWin:", result);
   return (
     <Container>
       <ResultTestPage>
@@ -28,6 +27,7 @@ export const TestResultPageWin: React.FC<TestResultPageWinProps> = ({
 
 const ResultTestPage = styled.div`
   display: flex;
+  align-items: center;
   gap: 28px;
 `;
 

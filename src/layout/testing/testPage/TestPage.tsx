@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "../../../components/Container";
 import { useNavigate } from "react-router-dom";
-import { TestResultPageWin } from "../testResultPage/TestResultPageWin";
-import { TestResultPageFailed } from "../testResultPage/TestResultPageFailed";
 
 type Question = {
   id: number;
@@ -25,7 +23,7 @@ export const TestPage: React.FC = () => {
     {
       id: 1,
       text: "Признание самоценности личности, реализация внутренней и внешней свободы – это принцип ... ",
-      options: ["гуманизма ", "непрерывности", "демократизации", "целостности"],
+      options: ["гуманизма", "непрерывности", "демократизации", "целостности"],
       correctAnswer: "гуманизма",
     },
     {
@@ -68,14 +66,11 @@ export const TestPage: React.FC = () => {
       if (currentQuestion === questions.length - 1) {
         const correctAnswers = questions.reduce((acc, question) => {
           const isCorrect = answers.includes(question.correctAnswer);
-          console.log(
-            `Question ${question.id}: ${isCorrect ? "Correct" : "Incorrect"}`
-          );
+
           return acc + (isCorrect ? 1 : 0);
         }, 0);
         const percentage = (correctAnswers / questions.length) * 100;
-        console.log("Percentage:", percentage);
-        setTestResult(percentage >= 80 ? "passed" : "failed");
+        setTestResult(percentage >= 50 ? "passed" : "failed");
       }
     };
   }, [currentQuestion, answers, questions.length]);
@@ -87,35 +82,22 @@ export const TestPage: React.FC = () => {
   const handleAnswer = (selectedOption: string) => {
     answers.includes(selectedOption);
 
-    console.log(`Your Answer: ${selectedOption}`);
-    console.log(`Correct Answer: ${currentQuestionData.correctAnswer}`);
     setAnswers([...answers, selectedOption]);
   };
 
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
-      setAnswers([]);
     } else {
       const correctAnswers = questions.reduce((acc, question) => {
         const isCorrect = answers.includes(question.correctAnswer);
-        // console.log(
-        //   `Question ${question.id}: ${isCorrect ? "Correct" : "Incorrect"}`
-        // );
+
         return acc + (isCorrect ? 1 : 0);
       }, 0);
       const percentage = (correctAnswers / questions.length) * 100;
-      console.log("Percentage:", percentage);
-      setTestResult(percentage >= 80 ? "passed" : "failed");
+      setTestResult(percentage >= 50 ? "passed" : "failed");
     }
   };
-
-  useEffect(() => {
-    console.log(
-      "Correct Answers:",
-      questions.map((q) => q.correctAnswer)
-    );
-  }, []);
 
   const handleStopTest = () => {
     setTestResult("failed");
@@ -125,7 +107,7 @@ export const TestPage: React.FC = () => {
   useEffect(() => {
     testResult !== null &&
       (testResult === "passed"
-        ? navigate("/resultsWin")
+        ? navigate("/resultWin")
         : navigate("/resultFailed"));
   }, [testResult]);
 

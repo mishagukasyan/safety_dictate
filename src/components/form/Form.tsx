@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Form = () => {
@@ -130,7 +131,7 @@ export const Form = () => {
         </FormGroup>
         <ButtonContainer>
           <Button type="submit">
-            <a href="/testpage">Начать тест</a>{" "}
+            <StyledNavLink to="/testpage">Начать тест</StyledNavLink>{" "}
           </Button>
           <h2>
             Нажимая кнопку “Начать тест”, Вы принимаете{" "}
@@ -196,6 +197,10 @@ const Button = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 12px;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
 `;
 
 const ButtonContainer = styled.div`
