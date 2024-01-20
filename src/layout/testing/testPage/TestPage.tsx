@@ -123,7 +123,7 @@ export const TestPage: React.FC = () => {
               <TestResultPageWin result={testResult} />
             ) : (
               <div>
-                <TestResultPageFailed result={testResult} />
+                <TestResultPageFailed />
               </div>
             )}
           </div>
