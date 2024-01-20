@@ -10,6 +10,7 @@ interface TestResultPageWinProps {
 export const TestResultPageWin: React.FC<TestResultPageWinProps> = ({
   result,
 }) => {
+  console.log("Result in TestResultPageWin:", result);
   return (
     <Container>
       <ResultTestPage>

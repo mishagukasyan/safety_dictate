@@ -67,12 +67,15 @@ export const TestPage: React.FC = () => {
     return () => {
       clearInterval(timer);
       if (currentQuestion === questions.length - 1) {
-        const correctAnswers = questions.reduce(
-          (acc, question) =>
-            acc + (answers.includes(question.correctAnswer) ? 1 : 0),
-          0
-        );
+        const correctAnswers = questions.reduce((acc, question) => {
+          const isCorrect = answers.includes(question.correctAnswer);
+          console.log(
+            `Question ${question.id}: ${isCorrect ? "Correct" : "Incorrect"}`
+          );
+          return acc + (isCorrect ? 1 : 0);
+        }, 0);
         const percentage = (correctAnswers / questions.length) * 100;
+        console.log("Percentage:", percentage);
         setTestResult(percentage >= 80 ? "passed" : "failed");
       }
     };
@@ -83,7 +86,7 @@ export const TestPage: React.FC = () => {
   }, [currentQuestion]);
 
   const handleAnswer = (selectedOption: string) => {
-    if (testResult === null) {
+    if (testResult === null && !answers.includes(selectedOption)) {
       setAnswers([selectedOption]);
     }
   };
@@ -93,17 +96,16 @@ export const TestPage: React.FC = () => {
       setCurrentQuestion((prev) => prev + 1);
       setAnswers([]);
     } else {
-      const correctAnswers = questions.reduce(
-        (acc, question) =>
-          acc + (submittedAnswers.includes(question.correctAnswer) ? 1 : 0),
-        0
-      );
+      const correctAnswers = questions.reduce((acc, question) => {
+        const isCorrect = answers.includes(question.correctAnswer);
+        console.log(
+          `Question ${question.id}: ${isCorrect ? "Correct" : "Incorrect"}`
+        );
+        return acc + (isCorrect ? 1 : 0);
+      }, 0);
       const percentage = (correctAnswers / questions.length) * 100;
-      if (percentage >= 80) {
-        navigate("/results", { state: { result: "passed" } });
-      } else {
-        navigate("/results-failed", { state: { result: "failed" } });
-      }
+      console.log("Percentage:", percentage);
+      setTestResult(percentage >= 80 ? "passed" : "failed");
     }
   };
 
@@ -112,67 +114,60 @@ export const TestPage: React.FC = () => {
   };
 
   const currentQuestionData = questions[currentQuestion];
+  useEffect(() => {
+    if (testResult === "passed") {
+      navigate("/resultWin");
+    } else if (testResult === "failed") {
+      navigate("/resultFailed");
+    }
+  }, [testResult, navigate]);
 
   return (
     <Container>
       <ControlTestingText>Контрольное тестирование</ControlTestingText>
       <TestContainer>
-        {testResult !== null ? (
-          <div>
-            {testResult === "passed" ? (
-              <TestResultPageWin result={testResult} />
-            ) : (
-              <div>
-                <TestResultPageFailed />
-              </div>
-            )}
-          </div>
-        ) : (
+        <Progress>
+          Прогресс: {currentQuestion + 1} из {questions.length} вопросов
+        </Progress>
+        <StatusLine>
+          <CurrentStatus
+            style={{
+              width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+            }}
+          />
+        </StatusLine>
+        <Timer>
+          <span>
+            {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
+            {String(timeLeft % 60).padStart(2, "0")}
+          </span>
+        </Timer>
+        {currentQuestionData && (
           <>
-            <Progress>
-              Прогресс: {currentQuestion + 1} из {questions.length} вопросов
-            </Progress>
-            <StatusLine>
-              <CurrentStatus
-                style={{
-                  width: `${((currentQuestion + 1) / questions.length) * 100}%`,
-                }}
-              />
-            </StatusLine>
-            <Timer>
-              <span>
-                {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
-                {String(timeLeft % 60).padStart(2, "0")}
-              </span>
-            </Timer>
-            {currentQuestionData && (
-              <>
-                <QuestionText>{currentQuestionData.text}</QuestionText>
-                <Options>
-                  {currentQuestionData.options.map((option, index) => (
-                    <Option key={index} onClick={() => handleAnswer(option)}>
-                      <RadioButton selected={answers.includes(option)}>
-                        {answers.includes(option) && <Dot />}
-                      </RadioButton>
-                      {option}
-                    </Option>
-                  ))}
-                </Options>
-                <NavigationButtons>
-                  <button
-                    onClick={handleNextQuestion}
-                    disabled={
-                      currentQuestion === questions.length - 1 || timeLeft === 0
-                    }
-                  >
-                    Следующий вопрос
-                  </button>
-                  <button onClick={handleStopTest} disabled={timeLeft === 0}>
-                    Прекратить тест
-                  </button>
-                </NavigationButtons>
-              </>
-            )}
+            <QuestionText>{currentQuestionData.text}</QuestionText>
+            <Options>
+              {currentQuestionData.options.map((option, index) => (
+                <Option key={index} onClick={() => handleAnswer(option)}>
+                  <RadioButton selected={answers.includes(option)}>
+                    {answers.includes(option) && <Dot />}
+                  </RadioButton>
+                  {option}
+                </Option>
+              ))}
+            </Options>
+            <NavigationButtons>
+              <button
+                onClick={handleNextQuestion}
+                disabled={
+                  currentQuestion === questions.length - 1 || timeLeft === 0
+                }
+              >
+                Следующий вопрос
+              </button>
+              <button onClick={handleStopTest} disabled={timeLeft === 0}>
+                Прекратить тест
+              </button>
+            </NavigationButtons>
           </>
         )}
       </TestContainer>

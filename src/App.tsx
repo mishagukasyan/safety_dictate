@@ -37,9 +37,12 @@ function App() {
           <Route path="/testSectionPage4" element={<TestSectionPage4 />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/adminReport" element={<AdminPanel />} />
-          <Route path="/results" element={<TestResultPageWin />} />
-          <Route path="/results" element={<TestResultPageFailed />} />
-
+          <Route path="/resultWin" element={<TestResultPageWin result="" />} />
+          <Route
+            path="/resultFailed"
+            element={<TestResultPageFailed result="" />}
+          />
+          {/* Другие маршруты, если они есть */}
           {/* <Route path="/admin/:adminToken/*" element={<AdminLoader />} /> */}
         </Routes>
         <Footer />
