@@ -82,8 +82,6 @@ export const TestSectionPage1: React.FC = () => {
   };
 
   const handleConfirmAnswer = () => {
-    // Добавить обработку подтверждения ответа отправку на сервер
-
     handleNextQuestion();
   };
   const currentQuestionData = questions[currentQuestion];
@@ -123,7 +121,7 @@ export const TestSectionPage1: React.FC = () => {
             <NavigationButtons>
               <button
                 onClick={handleConfirmAnswer}
-                disabled={answers.length === 0} // Кнопка неактивна, если ответ не выбран
+                disabled={answers.length === 0}
               >
                 Подтвердить ответ
               </button>

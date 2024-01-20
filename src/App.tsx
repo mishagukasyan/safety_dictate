@@ -42,7 +42,7 @@ function App() {
             path="/resultFailed"
             element={<TestResultPageFailed result="" />}
           />
-          {/* Другие маршруты, если они есть */}
+
           {/* <Route path="/admin/:adminToken/*" element={<AdminLoader />} /> */}
         </Routes>
         <Footer />

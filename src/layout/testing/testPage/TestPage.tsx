@@ -15,7 +15,6 @@ type Question = {
 export const TestPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
-  const [submittedAnswers, setSubmittedAnswers] = useState<string[]>([]);
   const [timeLeft, setTimeLeft] = useState(15);
   const [testResult, setTestResult] = useState<"passed" | "failed" | null>(
     null
@@ -86,11 +85,11 @@ export const TestPage: React.FC = () => {
   }, [currentQuestion]);
 
   const handleAnswer = (selectedOption: string) => {
-    if (testResult === null && !answers.includes(selectedOption)) {
-      console.log(`Your Answer: ${selectedOption}`);
-      console.log(`Correct Answer: ${currentQuestionData.correctAnswer}`);
-      setAnswers([selectedOption]);
-    }
+    answers.includes(selectedOption);
+
+    console.log(`Your Answer: ${selectedOption}`);
+    console.log(`Correct Answer: ${currentQuestionData.correctAnswer}`);
+    setAnswers([...answers, selectedOption]);
   };
 
   const handleNextQuestion = () => {
@@ -110,6 +109,13 @@ export const TestPage: React.FC = () => {
       setTestResult(percentage >= 80 ? "passed" : "failed");
     }
   };
+
+  useEffect(() => {
+    console.log(
+      "Correct Answers:",
+      questions.map((q) => q.correctAnswer)
+    );
+  }, []);
 
   const handleStopTest = () => {
     setTestResult("failed");
