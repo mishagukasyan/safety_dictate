@@ -44,12 +44,12 @@ export const TestPage: React.FC = () => {
       id: 3,
       text: "В способности человека узнавать предмет по его неполному или ошибочному изображению проявляется такое свойство восприятия, как … ",
       options: [
-        "структурность ",
+        "структурность",
         "целостность",
         "константность",
         "предметность",
       ],
-      correctAnswer: "структурность ",
+      correctAnswer: "структурность",
     },
     {
       id: 4,
@@ -87,6 +87,8 @@ export const TestPage: React.FC = () => {
 
   const handleAnswer = (selectedOption: string) => {
     if (testResult === null && !answers.includes(selectedOption)) {
+      console.log(`Your Answer: ${selectedOption}`);
+      console.log(`Correct Answer: ${currentQuestionData.correctAnswer}`);
       setAnswers([selectedOption]);
     }
   };
@@ -98,9 +100,9 @@ export const TestPage: React.FC = () => {
     } else {
       const correctAnswers = questions.reduce((acc, question) => {
         const isCorrect = answers.includes(question.correctAnswer);
-        console.log(
-          `Question ${question.id}: ${isCorrect ? "Correct" : "Incorrect"}`
-        );
+        // console.log(
+        //   `Question ${question.id}: ${isCorrect ? "Correct" : "Incorrect"}`
+        // );
         return acc + (isCorrect ? 1 : 0);
       }, 0);
       const percentage = (correctAnswers / questions.length) * 100;
@@ -115,12 +117,11 @@ export const TestPage: React.FC = () => {
 
   const currentQuestionData = questions[currentQuestion];
   useEffect(() => {
-    if (testResult === "passed") {
-      navigate("/resultWin");
-    } else if (testResult === "failed") {
-      navigate("/resultFailed");
-    }
-  }, [testResult, navigate]);
+    testResult !== null &&
+      (testResult === "passed"
+        ? navigate("/resultsWin")
+        : navigate("/resultFailed"));
+  }, [testResult]);
 
   return (
     <Container>
