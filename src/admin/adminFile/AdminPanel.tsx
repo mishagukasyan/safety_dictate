@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container } from "../../components/Container";
-import { ReportComponent } from "./ReportComponent";
+import { Link, Outlet } from "react-router-dom";
 
-interface NavLinkProps {
-  href: string;
+interface CustomNavLinkProps {
+  to: string;
   onClick: () => void;
   active: boolean;
   children: React.ReactNode;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({
-  href,
+const CustomNavLink: React.FC<CustomNavLinkProps> = ({
+  to,
   onClick,
   active,
   children,
 }) => {
   return (
-    <StyledNavLink href={href} onClick={onClick} active={active}>
+    <StyledNavLink to={to} onClick={onClick} active={active}>
       {children}
     </StyledNavLink>
   );
@@ -31,29 +31,30 @@ export const AdminPanel = () => {
       <StyledDiv>
         <DashboardMenu>
           <StyledNavLink
-            href="#"
+            to="adminReport"
             onClick={() => setActiveTab("download")}
             active={activeTab === "download"}
           >
             Скачать отчет
           </StyledNavLink>
           <StyledNavLink
-            href="#"
+            to="customise-test-section"
             onClick={() => setActiveTab("settings")}
             active={activeTab === "settings"}
           >
             Настройка разделов тестирования
           </StyledNavLink>
           <StyledNavLink
-            href="#"
+            to="#"
             onClick={() => setActiveTab("testSettings")}
             active={activeTab === "testSettings"}
           >
             Настройка вопросов-ответов для тестирования
           </StyledNavLink>
         </DashboardMenu>
+
         <ReportMenu>
-          <ReportComponent />
+          <Outlet />
         </ReportMenu>
       </StyledDiv>
     </Container>
@@ -65,12 +66,13 @@ const StyledDiv = styled.div`
 `;
 
 const DashboardMenu = styled.div`
+  width: 260px;
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+  padding-top: 60px;
 `;
 
-const StyledNavLink = styled.a<{ active: boolean }>`
+const StyledNavLink = styled(Link)<{ active: boolean }>`
   padding: 10px;
   margin-bottom: 8px;
   position: relative;
