@@ -44,14 +44,17 @@ export const AdminCustomizeTestSections = () => {
         <Modal>
           <ModalContent>
             <CloseButton onClick={() => setIsModalOpen(false)}>×</CloseButton>
-            <h2>Добавить новый раздел</h2>
-            <input
-              type="text"
-              placeholder="Введите название раздела"
-              value={newSection}
-              onChange={(e) => setNewSection(e.target.value)}
-            />
-            <AddButton onClick={handleAddSection}>Добавить</AddButton>
+            <h2>Добавление нового раздела</h2>
+            <ModalWindowContent>
+              Описание
+              <StyledInput
+                type="text"
+                placeholder="Введите название раздела"
+                value={newSection}
+                onChange={(e) => setNewSection(e.target.value)}
+              />
+            </ModalWindowContent>
+            <AddButton onClick={handleAddSection}>Добавить раздел</AddButton>
           </ModalContent>
         </Modal>
       )}
@@ -91,14 +94,14 @@ const Sections = styled.div`
       background: #f7f7f7;
       position: relative;
 
-      &::before {
+      /* &::before {
         content: "Раздел " counter(sectionCounter);
         counter-increment: sectionCounter;
         position: absolute;
         top: -20px;
         left: 0;
         font-weight: bold;
-      }
+      } */
 
       p {
         max-width: 734px;
@@ -121,28 +124,64 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
+  width: 1068px;
+  height: 450px;
   background: #fff;
-  padding: 20px;
+  padding: 60px 136px;
   border-radius: 10px;
   position: relative;
   text-align: center;
 `;
 
+const StyledInput = styled.input`
+  display: flex;
+  width: 796px;
+  padding: 14px 18px;
+  align-items: flex-start;
+  border-radius: 14px;
+  border: 1px solid #cecece;
+  background: #fff;
+  margin-bottom: 160px;
+  margin-top: 8px;
+`;
+
+const ModalWindowContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  margin-top: 40px;
+  color: #3c3c3c;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+`;
+
 const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   font-size: 20px;
   cursor: pointer;
   background: none;
-  border: none;
+  border: 1px solid #949494;
+  color: #949494;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
 `;
 
 const AddButton = styled.button`
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  display: inline-flex;
+  padding: 16px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 12px;
   background: #3798cd;
   color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 120%;
   cursor: pointer;
 `;
