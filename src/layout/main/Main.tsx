@@ -6,6 +6,7 @@ import "./../../styles/slider.css";
 import photo from "../../assets/image/banner1.webp";
 import photo2 from "../../assets/image/banner2.webp";
 import photo3 from "../../assets/image/banner3.webp";
+import { NavLink } from "react-router-dom";
 
 type SlidePropsType = { text: string; image: string };
 
@@ -16,7 +17,7 @@ const Slide = (props: SlidePropsType) => {
       <ContentContainer>
         <h1>{props.text}</h1>
         <StyledButton>
-          <a href="/testing">Начать тест</a>{" "}
+          <StyledNavLink to="/testing">Начать тест</StyledNavLink>{" "}
         </StyledButton>
       </ContentContainer>
     </ImageContainer>
@@ -100,8 +101,9 @@ const StyledButton = styled.button`
   background: #3798cd;
   color: #fff;
   font-family: Raleway;
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: inherit;
 `;

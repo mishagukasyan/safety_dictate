@@ -12,7 +12,6 @@ import { TestSectionPage2 } from "./layout/training/trainingTestSection/TestSect
 import { TestSectionPage3 } from "./layout/training/trainingTestSection/TestSectionPage3";
 import { TestSectionPage4 } from "./layout/training/trainingTestSection/TestSectionPage4";
 import { AboutTheProject } from "./layout/aboutProject/AboutTheProject";
-// import { AdminLoader } from "./admin/AdminLoader";
 import { AdminDashboard } from "./admin/AdminDashboard";
 import { AdminPanel } from "./admin/adminFile/AdminPanel";
 import { TestResultPageWin } from "./layout/testing/testResultPage/TestResultPageWin";
@@ -42,8 +41,6 @@ function App() {
             path="/resultFailed"
             element={<TestResultPageFailed result="" />}
           />
-
-          {/* <Route path="/admin/:adminToken/*" element={<AdminLoader />} /> */}
         </Routes>
         <Footer />
       </div>

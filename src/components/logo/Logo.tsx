@@ -1,8 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 export const Logo = () => {
   return (
-    <a href="/main">
+    <StyledNavLink to="/main">
       <svg
         width="150"
         height="54"
@@ -54,6 +56,8 @@ export const Logo = () => {
           </clipPath>
         </defs>
       </svg>
-    </a>
+    </StyledNavLink>
   );
 };
+
+const StyledNavLink = styled(NavLink)``;

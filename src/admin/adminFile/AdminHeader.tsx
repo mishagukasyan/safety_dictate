@@ -1,11 +1,14 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const AdminHeader = () => {
   return (
     <StyledAdminHeader>
-      <h2></h2>
-      <NavLink>перейти на сайт</NavLink>
+      <AdminWrapper>
+        <h2>Панель администратора</h2>
+        <StyledNavLink to="/main">перейти на сайт</StyledNavLink>
+      </AdminWrapper>
       <button>Выход</button>
     </StyledAdminHeader>
   );
@@ -15,4 +18,8 @@ const StyledAdminHeader = styled.div`
   display: flex;
 `;
 
-const NavLink = styled.nav``;
+const AdminWrapper = styled.div`
+  display: flex;
+`;
+
+const StyledNavLink = styled(NavLink)``;

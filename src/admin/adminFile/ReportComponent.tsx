@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ReportComponent = () => {
   // Состояния для фильтров
-  const [age, setAge] = useState(false);
+  const [ageRange, setAgeRange] = useState({ min: 18, max: 60 });
   const [gender, setGender] = useState(false);
   const [region, setRegion] = useState(false);
   const [city, setCity] = useState(false);
@@ -16,9 +16,6 @@ export const ReportComponent = () => {
   // Обработчик фильтров
   const handleFilterChange = (filterName: string) => {
     switch (filterName) {
-      case "age":
-        setAge(!age);
-        break;
       case "gender":
         setGender(!gender);
         break;
@@ -34,6 +31,13 @@ export const ReportComponent = () => {
       default:
         break;
     }
+  };
+
+  const handleAgeRangeChange = (type: "min" | "max", value: number) => {
+    setAgeRange((prevRange) => ({
+      ...prevRange,
+      [type]: value,
+    }));
   };
 
   // Обработчик периода
@@ -60,12 +64,6 @@ export const ReportComponent = () => {
       <StyledText>Выберите фильтры</StyledText>
       <StyledFilter>
         <FilterButton
-          className={age ? "selected" : ""}
-          onClick={() => handleFilterChange("age")}
-        >
-          Возраст
-        </FilterButton>
-        <FilterButton
           className={gender ? "selected" : ""}
           onClick={() => handleFilterChange("gender")}
         >
@@ -90,9 +88,36 @@ export const ReportComponent = () => {
           Идентификатор
         </FilterButton>
       </StyledFilter>
+      <AgeRangeWrapper>
+        <StyledText>Введите возраст респондента</StyledText>
+        <StyledInputWrapper>
+          <StyledLabel>
+            От
+            <StyledAgeInput
+              type="number"
+              placeholder="От"
+              value={ageRange.min}
+              onChange={(e) =>
+                handleAgeRangeChange("min", parseInt(e.target.value))
+              }
+            />
+          </StyledLabel>
+          <StyledLabel>
+            До
+            <StyledAgeInput
+              type="number"
+              placeholder="До"
+              value={ageRange.max}
+              onChange={(e) =>
+                handleAgeRangeChange("max", parseInt(e.target.value))
+              }
+            />
+          </StyledLabel>
+        </StyledInputWrapper>
+      </AgeRangeWrapper>
       {/* Период */}
       <StyledText>Укажите период</StyledText>
-      <StyledDataWrapper>
+      <StyledInputWrapper>
         <StyledLabel>
           От
           <StyledInput
@@ -109,7 +134,7 @@ export const ReportComponent = () => {
             onChange={(e) => handleDateChange("endDate", e.target.value)}
           />
         </StyledLabel>
-      </StyledDataWrapper>
+      </StyledInputWrapper>
 
       <StyledButtonDownload onClick={handleDownload}>
         Скачать
@@ -124,7 +149,7 @@ const StyledReportComponent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 60px;
+  gap: 20px;
   border-radius: 80px;
   background: #f5f5f5;
   margin-left: 40px;
@@ -136,6 +161,7 @@ const StyledText = styled.h2`
   font-size: 24px;
   font-weight: 500;
   line-height: 110%;
+  margin: 20px 0 20px 0;
 `;
 
 const StyledFilter = styled.div`
@@ -143,7 +169,7 @@ const StyledFilter = styled.div`
   gap: 16px;
 `;
 
-const StyledDataWrapper = styled.div`
+const StyledInputWrapper = styled.div`
   display: flex;
   gap: 16px;
 `;
@@ -164,11 +190,22 @@ const FilterButton = styled.button`
   font-weight: 400;
 `;
 
+const AgeRangeWrapper = styled.div``;
+
+const StyledAgeInput = styled.input`
+  width: 60px;
+  border-radius: 14px;
+  border: 1px solid #cecece;
+  background: #fff;
+  padding: 14px;
+  box-sizing: border-box;
+`;
+
 const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: #3c3c3c;
+  color: #949494;
   font-family: Roboto;
   font-size: 16px;
   font-weight: 500;
