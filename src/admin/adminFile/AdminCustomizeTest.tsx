@@ -7,7 +7,18 @@ export const AdminCustomizeTestSections = () => {
   const [testSections, setTestSections] = useState(() => {
     try {
       const storedSections = localStorage.getItem("testSections");
-      return storedSections ? JSON.parse(storedSections) : [];
+      if (storedSections) {
+        return JSON.parse(storedSections);
+      } else {
+        const initialSections = [
+          "Психологические факторы, оказывающие влияние на активность в политической сфере",
+          "Влияние психологической совместимости членов профессиональной группы на социально-психологический климат коллектива",
+          "Условия и механизмы формирования познавательных процессов представителей трех возрастов (дошкольное детство, младший школьный возраст, подростковый возраст)",
+          "Социально-психологический тренинг как способ повышения коммуникативной компетентности",
+        ];
+        localStorage.setItem("testSections", JSON.stringify(initialSections));
+        return initialSections;
+      }
     } catch (error) {
       console.error("Ошибка при восстановлении из localStorage:", error);
       return [];
@@ -94,7 +105,6 @@ export const AdminCustomizeTestSections = () => {
     </StyledCustomizeSection>
   );
 };
-
 const StyledCustomizeSection = styled.div`
   padding: 48px 0 0 40px;
 `;
@@ -105,6 +115,15 @@ const Button = styled.button`
   border: 1px solid #3798cd;
   background: #fff;
   cursor: pointer;
+  color: #3798cd;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 16px;
+  :hover {
+    background: #3798cd;
+    color: #fff;
+  }
 `;
 
 const Line = styled.div`
@@ -126,9 +145,17 @@ const Sections = styled.div`
       border: 1px solid #cecece;
       background: #f7f7f7;
       position: relative;
+      :hover {
+        cursor: pointer;
+        border: 1px solid #3798cd;
+        background: #f0faff;
+      }
       p {
         max-width: 734px;
-        margin-top: 10px;
+        color: #3c3c3c;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 120%;
       }
     }
   }
@@ -166,6 +193,8 @@ const StyledInput = styled.input`
   background: #fff;
   margin-bottom: 160px;
   margin-top: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 `;
 
 const ModalWindowContent = styled.div`
@@ -201,10 +230,15 @@ const AddButton = styled.button`
   gap: 10px;
   border: none;
   border-radius: 12px;
-  background: #3798cd;
-  color: #fff;
+  border: 1px solid #3798cd;
+  background: #fff;
+  color: #3798cd;
   font-size: 18px;
   font-weight: 600;
   line-height: 120%;
   cursor: pointer;
+  :hover {
+    background: #3798cd;
+    color: #fff;
+  }
 `;
