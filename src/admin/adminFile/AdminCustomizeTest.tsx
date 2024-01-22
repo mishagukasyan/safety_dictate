@@ -1,27 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export const AdminCustomizeTestSections = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newSection, setNewSection] = useState("");
-  const [testSections, setTestSections] = useState([
-    "Психологические факторы, оказывающие влияние на активность в политической сфере",
-    "Влияние психологической совместимости членов профессиональной группы на социально-психологический климат коллектива",
-    "Условия и механизмы формирования познавательных процессов представителей трех возрастов (дошкольное детство, младший школьный возраст, подростковый возраст)",
-    "Социально-психологический тренинг как способ повышения коммуникативной компетентности",
-  ]);
+  const [testSections, setTestSections] = useState(() => {
+    try {
+      const storedSections = localStorage.getItem("testSections");
+      return storedSections ? JSON.parse(storedSections) : [];
+    } catch (error) {
+      console.error("Ошибка при восстановлении из localStorage:", error);
+      return [];
+    }
+  });
+
+  const [selectedSectionIndex, setSelectedSectionIndex] = useState(null);
+
+  const handleEditSection = (index: any) => {
+    setSelectedSectionIndex(index);
+    setNewSection(testSections[index]);
+    setIsModalOpen(true);
+  };
 
   const handleAddSection = () => {
-    // Логика добавления раздела, например, отправка на сервер
-    console.log("Добавлен новый раздел:", newSection);
+    if (newSection.trim() === "") {
+      return;
+    }
 
-    // Обновляем список разделов
-    setTestSections((prevSections) => [...prevSections, newSection]);
+    setTestSections((prevSections: any) => {
+      const updatedSections = [...prevSections];
 
-    // Закрываем модальное окно
+      if (
+        selectedSectionIndex !== null &&
+        typeof selectedSectionIndex === "number"
+      ) {
+        updatedSections[selectedSectionIndex] = newSection;
+      } else {
+        updatedSections.push(newSection);
+      }
+
+      try {
+        localStorage.setItem("testSections", JSON.stringify(updatedSections));
+        console.log("Sections saved to localStorage:", updatedSections);
+      } catch (error) {
+        console.error("Ошибка при сохранении в localStorage:", error);
+      }
+
+      return updatedSections;
+    });
+
     setIsModalOpen(false);
-
-    // Очищаем состояние нового раздела
+    setSelectedSectionIndex(null);
     setNewSection("");
   };
 
@@ -31,8 +60,8 @@ export const AdminCustomizeTestSections = () => {
       <Line></Line>
       <Sections>
         <ul>
-          {testSections.map((section, index) => (
-            <li key={section}>
+          {testSections.map((section: string, index: number) => (
+            <li key={section} onClick={() => handleEditSection(index)}>
               <p>
                 {index + 1}. {section}
               </p>
@@ -54,7 +83,11 @@ export const AdminCustomizeTestSections = () => {
                 onChange={(e) => setNewSection(e.target.value)}
               />
             </ModalWindowContent>
-            <AddButton onClick={handleAddSection}>Добавить раздел</AddButton>
+            <AddButton onClick={handleAddSection}>
+              {selectedSectionIndex !== null
+                ? "Сохранить изменения"
+                : "Добавить раздел"}
+            </AddButton>
           </ModalContent>
         </Modal>
       )}
@@ -93,16 +126,6 @@ const Sections = styled.div`
       border: 1px solid #cecece;
       background: #f7f7f7;
       position: relative;
-
-      /* &::before {
-        content: "Раздел " counter(sectionCounter);
-        counter-increment: sectionCounter;
-        position: absolute;
-        top: -20px;
-        left: 0;
-        font-weight: bold;
-      } */
-
       p {
         max-width: 734px;
         margin-top: 10px;
