@@ -16,6 +16,7 @@ import { TestResultPageWin } from "./layout/testing/testResultPage/TestResultPag
 import { TestResultPageFailed } from "./layout/testing/testResultPage/TestResultPageFailed";
 import { ReportComponent } from "./admin/adminFile/ReportComponent";
 import { Layout } from "./components/Layout";
+import { AdminCustomizeQuestions } from "./admin/adminFile/AdminCustomizeQuestions";
 
 function App() {
   return (
@@ -36,8 +37,12 @@ function App() {
             <Route path="adminReport/*" element={<AdminPanel />}>
               <Route path="adminReport" element={<ReportComponent />} />
               <Route
-                path="customise-test-section"
+                path="customiseTestSection"
                 element={<AdminCustomizeTestSections />}
+              />
+              <Route
+                path="customiseTestQuestions"
+                element={<AdminCustomizeQuestions />}
               />
             </Route>
 

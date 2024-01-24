@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { SectionIcon } from "../../components/icons/SectionIcon";
 
-export const AdminCustomizeTestSections = () => {
+export const AdminCustomizeQuestions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newSection, setNewSection] = useState("");
-  const [testSections, setTestSections] = useState(() => {
+  const [newQuestions, setNewQuestions] = useState("");
+  const [testQuestions, setTestQuestions] = useState(() => {
     try {
-      const storedSections = localStorage.getItem("testSections");
-      if (storedSections) {
-        return JSON.parse(storedSections);
+      const storedQuestions = localStorage.getItem("testQuestions");
+      if (storedQuestions) {
+        return JSON.parse(storedQuestions);
       } else {
-        const initialSections = [
-          "Психологические факторы, оказывающие влияние на активность в политической сфере",
-          "Влияние психологической совместимости членов профессиональной группы на социально-психологический климат коллектива",
-          "Условия и механизмы формирования познавательных процессов представителей трех возрастов (дошкольное детство, младший школьный возраст, подростковый возраст)",
+        const initialQuestions = [
+          "Признание самоценности личности, реализация внутренней и внешней свободы – это принцип ... ",
+          "Социальную перцепцию определяют как …",
+          "В способности человека узнавать предмет по его неполному или ошибочному изображению проявляется такое свойство восприятия, как …",
           "Социально-психологический тренинг как способ повышения коммуникативной компетентности",
+          "Признание самоценности личности, реализация внутренней и внешней свободы – это принцип ...",
         ];
-        localStorage.setItem("testSections", JSON.stringify(initialSections));
-        return initialSections;
+        localStorage.setItem("testQuestions", JSON.stringify(initialQuestions));
+        return initialQuestions;
       }
     } catch (error) {
       console.error("Ошибка при восстановлении из localStorage:", error);
@@ -26,87 +26,85 @@ export const AdminCustomizeTestSections = () => {
     }
   });
 
-  const [selectedSectionIndex, setSelectedSectionIndex] = useState(null);
+  const [selectedQuestionsIndex, setSelectedQuestionsIndex] = useState(null);
 
-  const handleEditSection = (index: any) => {
-    setSelectedSectionIndex(index);
-    setNewSection(testSections[index]);
+  const handleEditQuestions = (index: any) => {
+    setSelectedQuestionsIndex(index);
+    setNewQuestions(testQuestions[index]);
     setIsModalOpen(true);
   };
 
-  const handleAddSection = () => {
-    if (newSection.trim() === "") {
+  const handleAddQuestions = () => {
+    if (newQuestions.trim() === "") {
       return;
     }
 
-    setTestSections((prevSections: any) => {
-      const updatedSections = [...prevSections];
+    setTestQuestions((prevQuestions: any) => {
+      const updatedQuestions = [...prevQuestions];
 
       if (
-        selectedSectionIndex !== null &&
-        typeof selectedSectionIndex === "number"
+        selectedQuestionsIndex !== null &&
+        typeof selectedQuestionsIndex === "number"
       ) {
-        updatedSections[selectedSectionIndex] = newSection;
+        updatedQuestions[selectedQuestionsIndex] = newQuestions;
       } else {
-        updatedSections.push(newSection);
+        updatedQuestions.push(newQuestions);
       }
 
       try {
-        localStorage.setItem("testSections", JSON.stringify(updatedSections));
-        console.log("Sections saved to localStorage:", updatedSections);
+        localStorage.setItem("testQuestions", JSON.stringify(updatedQuestions));
+        console.log("Questions saved to localStorage:", updatedQuestions);
       } catch (error) {
         console.error("Ошибка при сохранении в localStorage:", error);
       }
 
-      return updatedSections;
+      return updatedQuestions;
     });
 
     setIsModalOpen(false);
-    setSelectedSectionIndex(null);
-    setNewSection("");
+    setSelectedQuestionsIndex(null);
+    setNewQuestions("");
   };
 
   return (
-    <StyledCustomizeSection>
-      <Button onClick={() => setIsModalOpen(true)}>Добавить раздел</Button>
+    <StyledCustomizeQuestions>
+      <Button onClick={() => setIsModalOpen(true)}>Добавить вопрос</Button>
       <Line></Line>
-      <Sections>
+      <Questions>
         <ul>
-          {testSections.map((section: string, index: number) => (
-            <li key={section} onClick={() => handleEditSection(index)}>
-              <p>
-                {index + 1}. {section}
-              </p>
+          {testQuestions.map((section: string, index: number) => (
+            <li key={section} onClick={() => handleEditQuestions(index)}>
+              <p>{section}</p>
             </li>
           ))}
         </ul>
-      </Sections>
+      </Questions>
       {isModalOpen && (
         <Modal>
           <ModalContent>
             <CloseButton onClick={() => setIsModalOpen(false)}>×</CloseButton>
-            <h2>Добавление нового раздела</h2>
+            <h2>Добавление нового вопроса</h2>
             <ModalWindowContent>
               Описание
               <StyledInput
                 type="text"
-                placeholder="Введите название раздела"
-                value={newSection}
-                onChange={(e) => setNewSection(e.target.value)}
+                placeholder="Введите название вопроса"
+                value={newQuestions}
+                onChange={(e) => setNewQuestions(e.target.value)}
               />
             </ModalWindowContent>
-            <AddButton onClick={handleAddSection}>
-              {selectedSectionIndex !== null
+            <AddButton onClick={handleAddQuestions}>
+              {selectedQuestionsIndex !== null
                 ? "Сохранить изменения"
-                : "Добавить раздел"}
+                : "Добавить вопрос"}
             </AddButton>
           </ModalContent>
         </Modal>
       )}
-    </StyledCustomizeSection>
+    </StyledCustomizeQuestions>
   );
 };
-const StyledCustomizeSection = styled.div`
+const StyledCustomizeQuestions = styled.div`
   padding: 48px 0 0 40px;
 `;
 
@@ -133,11 +131,11 @@ const Line = styled.div`
   padding: 20px 0 34px 0;
 `;
 
-const Sections = styled.div`
+const Questions = styled.div`
   ul {
     display: flex;
     flex-direction: column;
-    gap: 34px;
+    gap: 5px;
     li {
       width: 1048px;
       padding: 28px 40px;

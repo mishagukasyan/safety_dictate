@@ -38,14 +38,14 @@ export const AdminPanel = () => {
             Скачать отчет
           </StyledNavLink>
           <StyledNavLink
-            to="customise-test-section"
+            to="customiseTestSection"
             onClick={() => setActiveTab("settings")}
             active={activeTab === "settings"}
           >
             Настройка разделов тестирования
           </StyledNavLink>
           <StyledNavLink
-            to="#"
+            to="customiseTestQuestions"
             onClick={() => setActiveTab("testSettings")}
             active={activeTab === "testSettings"}
           >
