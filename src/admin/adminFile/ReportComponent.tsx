@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 export const ReportComponent = () => {
-  // Состояния для фильтров
   const [ageRange, setAgeRange] = useState({ min: 18, max: 60 });
   const [gender, setGender] = useState(false);
   const [region, setRegion] = useState(false);
   const [city, setCity] = useState(false);
   const [identeficator, setIdenteficator] = useState(false);
 
-  // Состояния для периода от и до
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  // Обработчик фильтров
   const handleFilterChange = (filterName: string) => {
     switch (filterName) {
       case "gender":
@@ -40,7 +37,6 @@ export const ReportComponent = () => {
     }));
   };
 
-  // Обработчик периода
   const handleDateChange = (dateName: string, value: string) => {
     switch (dateName) {
       case "startDate":
@@ -60,7 +56,6 @@ export const ReportComponent = () => {
 
   return (
     <StyledReportComponent>
-      {/* Фильтры */}
       <StyledText>Выберите фильтры</StyledText>
       <StyledFilter>
         <FilterButton
@@ -115,7 +110,6 @@ export const ReportComponent = () => {
           </StyledLabel>
         </StyledInputWrapper>
       </AgeRangeWrapper>
-      {/* Период */}
       <StyledText>Укажите период</StyledText>
       <StyledInputWrapper>
         <StyledLabel>
