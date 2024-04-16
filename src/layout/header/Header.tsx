@@ -4,6 +4,7 @@ import { Logo } from "../../components/logo/Logo";
 import { Menu } from "../../components/menu/Menu";
 import { Container } from "../../components/Container";
 import { AdminHeader } from "../../admin/adminFile/AdminHeader";
+import styles from "./styles.module.scss"
 
 interface HeaderProps {
   isAdminPanel: boolean;
@@ -11,24 +12,13 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isAdminPanel }) => {
   return (
-    <StyledHeader>
+    <div className={styles.header}>
       <Container>
-        <ContainerMenu>
-          <Logo />
+        <div className={styles.headerMenu}>
+         <Logo />
           {isAdminPanel ? <AdminHeader /> : <Menu />}
-        </ContainerMenu>
+        </div>
       </Container>
-    </StyledHeader>
+    </div>
   );
 };
-
-const StyledHeader = styled.header`
-  border-bottom: 1px solid #ededed;
-  padding: 50px 0;
-`;
-
-const ContainerMenu = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;

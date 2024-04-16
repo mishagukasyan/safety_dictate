@@ -174,7 +174,7 @@ const ControlTestingText = styled.h2`
 `;
 const TestContainer = styled.div`
   max-width: 1044px;
-  margin: 0 auto;
+  // margin: 0 auto;
 `;
 
 const Progress = styled.div`

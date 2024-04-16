@@ -28,7 +28,7 @@ const StyledTraining = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 108px;
-  margin-top: 80px;
+  margin: 80px 0;
 `;
 
 const TrialTest = styled.div`

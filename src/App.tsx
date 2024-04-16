@@ -24,7 +24,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/main" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path="/testing" element={<Testing />} />
             <Route path="/testpage" element={<TestPage />} />
             <Route path="/training" element={<Training />} />

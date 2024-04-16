@@ -21,9 +21,13 @@ export const Footer = () => {
 };
 
 const StyledFooter = styled.footer`
-  margin-top: 100px;
-  padding: 35px 0;
+    // margin-top: 174px;
+  // padding: 32px 0;
   border-top: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  
 `;
 
 const ContentFooter = styled.div`
@@ -31,6 +35,7 @@ const ContentFooter = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  padding: 32px 0;
 
   h2 {
     color: #3c3c3c;

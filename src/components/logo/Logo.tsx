@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const Logo = () => {
   return (
-    <StyledNavLink to="/main">
+    <StyledNavLink to="/">
       <svg
         width="150"
         height="54"

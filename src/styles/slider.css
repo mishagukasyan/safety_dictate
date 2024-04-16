@@ -1,18 +1,29 @@
+.alice-carousel {
+  position: relative;
+  width: 100%;
+  direction: ltr;
+}
+
 .alice-carousel__dots {
-  margin: 0;
+  max-width: 120px;
+  min-height: 93px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .alice-carousel__dots-item:not(.__custom) {
-  display: inline-block;
+  display: flex;
   width: 20px;
   height: 20px;
-  margin: 5px;
+  /* margin: 5px; */
   border: 1px solid black;
   background: none;
 }
 
 .alice-carousel__dots-item:not(.__custom):not(:last-child) {
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
 .alice-carousel__dots-item:not(.__custom):hover {
@@ -20,9 +31,31 @@
 }
 
 .alice-carousel__dots-item:not(.__custom).__active {
-  top: 50%;
+  /* top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: black;
+  border-radius: 50%; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  /* margin: 5px; */
+  border: 1px solid black;
+  background: none;
+}
+
+.alice-carousel__dots-item:not(.__custom).__active::after {
+  content: '';
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
   width: 6px;
   height: 6px;
   background-color: black;

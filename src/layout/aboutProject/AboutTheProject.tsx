@@ -22,7 +22,9 @@ export const AboutTheProject = () => {
   );
 };
 
-const StyledAboutTheProject = styled.div``;
+const StyledAboutTheProject = styled.div`
+margin-bottom: 80px;
+`;
 
 const TextContainer = styled.div`
   display: flex;

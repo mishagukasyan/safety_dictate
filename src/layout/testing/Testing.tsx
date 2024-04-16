@@ -28,7 +28,7 @@ const StyledTesting = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 80px;
-  margin-top: 80px;
+  margin: 80px 0;
 `;
 
 const StyledOrder = styled.div`

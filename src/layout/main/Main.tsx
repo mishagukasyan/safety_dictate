@@ -54,24 +54,33 @@ export const Main = () => (
 const MainContainer = styled.div`
   max-width: 1340px;
   width: 100%;
+  min-height: 813px;
   margin: 0 auto;
   height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const Banner = styled.img`
   border-radius: 80px;
-  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // margin: 80px 0px 0px 0px;
+  // position: relative;
+  // max-width: 1340px;
 `;
 
 const ImageContainer = styled.div`
-  display: flex;
+    display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 const ContentContainer = styled.div`
   position: absolute;
-  top: 320px;
+  top: 270px;
   left: 150px;
   text-align: center;
   color: white;
